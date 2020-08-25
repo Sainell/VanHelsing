@@ -5,14 +5,12 @@ using System;
 namespace BeastHunter
 {
     [Serializable]
-    public struct StartDialogueStruct
+    public struct TraceStruct 
     {
         #region Fields
 
         public GameObject Prefab;
         public Transform PlayerTransform;
-        public GameObject PrefabCanvasNpc;
-        public GameObject PrefabCanvasTrace;
 
         #endregion
     }

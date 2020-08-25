@@ -21,6 +21,7 @@ namespace BeastHunter
         private float _lastTrigger;
         private float _npcLastTrigger;
         private float _enemyLastTrigger;
+        private bool isAwake;
 
         #endregion
 
@@ -31,10 +32,22 @@ namespace BeastHunter
         {
             _collider = GetComponent<Collider>();
             _particleSystem = GetComponent<ParticleSystem>();
-            Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAccepted, OnQuestAccept);
-            Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestReported, OnQuestRemove);
-            Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAbandoned, OnQuestRemove);
-            Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestTaskUpdated, OnTaskComplete);
+            //Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAccepted, OnQuestAccept);
+            //Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestReported, OnQuestRemove);
+            //Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAbandoned, OnQuestRemove);
+            //Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestTaskUpdated, OnTaskComplete);
+        }
+
+        public void Update()
+        {
+            if(!isAwake)
+            {
+                Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAccepted, OnQuestAccept);
+                Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestReported, OnQuestRemove);
+                Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestAbandoned, OnQuestRemove);
+                Services.SharedInstance.EventManager.StartListening(GameEventTypes.QuestTaskUpdated, OnTaskComplete);
+                isAwake = true;
+            }
         }
 
         private void OnTaskComplete(EventArgs arg0)

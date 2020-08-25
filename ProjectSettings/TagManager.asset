@@ -24,6 +24,8 @@ TagManager:
   - Sphere
   - Weapon
   - Place
+  - Trace
+
   layers:
   - Default
   - TransparentFX

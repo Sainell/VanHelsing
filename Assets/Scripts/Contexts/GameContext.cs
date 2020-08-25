@@ -20,6 +20,7 @@ namespace BeastHunter
         public InputModel InputModel;
         public GiantMudCrabModel GiantMudCrabModel;
         public List<QuestIndicatorModel> QuestIndicatorModelList = new List<QuestIndicatorModel>();
+        public List<TraceModel> TraceModelList = new List<TraceModel>();
         public QuestJournalModel QuestJournalModel;
         public UIIndicationModel UIIndicationModel;
 

@@ -28,9 +28,10 @@ namespace BeastHunter
         {
             var StartDialogueData = Data.StartDialogueData;
             GameObject instance = GameObject.Instantiate(StartDialogueData.StartDialogueStruct.Prefab,StartDialogueData.StartDialogueStruct.PlayerTransform);
+
             GameObject canvasNpc = GameObject.Instantiate(StartDialogueData.StartDialogueStruct.PrefabCanvasNpc); //For 3D mode
-            StartDialogueModel StartDialogue = new StartDialogueModel(instance, canvasNpc, StartDialogueData, _context); //For 3D mode
-         //   StartDialogueModel StartDialogue = new StartDialogueModel(instance, StartDialogueData, _context);
+            GameObject canvasTrace = GameObject.Instantiate(StartDialogueData.StartDialogueStruct.PrefabCanvasTrace); //For 3D mode
+            StartDialogueModel StartDialogue = new StartDialogueModel(instance, canvasNpc, canvasTrace, StartDialogueData, _context);
             _context.StartDialogueModel = StartDialogue;
 
             StartDialogueData.SetPerent(instance.transform, StartDialogueData.GetParent()); //For 3D mode

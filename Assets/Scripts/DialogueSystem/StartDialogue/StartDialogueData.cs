@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -14,10 +15,14 @@ namespace BeastHunter
         public StartDialogueModel Model;
         public Vector3 NpcPos;
         public int NpcID;
+        public int TraceID;
         public DialogueSystemModel DialogueSystemModel;
         public GameObject CanvasNpc;
+        public GameObject CanvasTrace;
         public Transform CharacterCamera;
-        public bool dialogueStatus;
+        public string TargetTag;
+        public GameObject Trace;
+        public bool Flag;
 
         #endregion
 
@@ -29,7 +34,7 @@ namespace BeastHunter
         #endregion
 
 
-        #region Metods
+        #region Methods
 
         public void DialogUsing()
         {
@@ -37,25 +42,47 @@ namespace BeastHunter
             {
                 if (!DialogueSystemModel.DialogueCanvas.enabled)
                 {
-                    CanvasNpc.SetActive(true);//For 3d mode
-                    CanvasNpc.transform.LookAt(GetCharacterCamera()); //For 3d mode
+                    if (TargetTag.Equals("NPC"))
+                    {
+                        CanvasNpc.SetActive(true);
+                        CanvasNpc.transform.LookAt(GetCharacterCamera());
+                    }
+                    if (TargetTag.Equals("Trace"))
+                    {
+                        if (Flag)
+                        {
+                            CanvasTrace.SetActive(true);
+                            CanvasTrace.transform.LookAt(GetCharacterCamera());
+                        }
+                    }
                 }
+
                 if (Input.GetButtonDown("Use"))
                 {
-                    DialogStatus(true);
-                    CanvasNpc.SetActive(false); //For 3d mode
+                    if (TargetTag.Equals("NPC"))
+                    {
+                        DialogStatus(true);
+                        CanvasNpc.SetActive(false);
+                    }
+                    if (TargetTag.Equals("Trace"))
+                    {
+                        TraceStatus(TraceID);
+                        CanvasTrace.SetActive(false);
+                        Flag = false;
+                    }
                 }
                 if (Input.GetButtonDown("Cancel"))
                 {
                     DialogStatus(false);
-                    CanvasNpc.SetActive(true);//For 3d mode
+                    CanvasNpc.SetActive(true);
                 }
             }
             else
             {
                 if (Model != null)
                 {
-                    CanvasNpc.SetActive(false);//For 3d mode
+                    CanvasNpc.SetActive(false);
+                    CanvasTrace.SetActive(false);
                     if (DialogueSystemModel.DialogueCanvas.enabled)
                     {
                         DialogStatus(false);
@@ -64,52 +91,36 @@ namespace BeastHunter
             }
         }
 
-        public void OnDialogueStart(int npcId)
-        {
-            NpcID = npcId;
-            if (NpcID == 0)
-            {
-                DialogStatus(true);
-            }
-            DialogueSwitcher();
-
-        }
-
-        private void DialogueSwitcher()
-        {
-            if (!dialogueStatus)
-            {
-                DialogStatus(true);
-            }
-            else
-            {
-                DialogStatus(false);
-                NpcID = 0;
-            }
-        }
-
-        public void OnUpdateDialogueByQuest(EventArgs args)// test updating in dialog
-        {
-            DialogStatus(true);
-        }
-
         private void DialogStatus(bool isShowDialogCanvas)
         {
             DialogueSystemModel.DialogueNode = DialogueGenerate.DialogueCreate(NpcID, Model.Context);
             ShowCanvasEvent?.Invoke(isShowDialogCanvas);
-            dialogueStatus = isShowDialogCanvas;
         }
 
-        public void DialogAreaEnterSwitcher(bool isOn = true)// for MAP True 
+        private void TraceStatus(int id)
+        {
+            Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.ObjectUsed, new IdArgs(id));
+            TraceOff();
+            
+        }
+
+        public void DialogAreaEnterSwitcher(bool isOn)
         {
             Model.IsDialogueAreaEnter = isOn;
         }
 
-        public Transform GetParent() //For 3D mode
-        { //For 3D mode
-            var player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);  //For 3d mode
-            return player.transform; //For 3D mode
-        } //For 3D mode
+        private void TraceOff()
+        {
+            Destroy(Trace);
+
+            CanvasTrace.SetActive(false);
+        }
+
+        public Transform GetParent()
+        {
+            var player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);
+            return player.transform;
+        }
 
         public void SetPerent(Transform startDialogueTransform, Transform parent)
         {
@@ -119,18 +130,35 @@ namespace BeastHunter
 
         public void OnTriggerEnter(Collider other)
         {
-            DialogueSystemModel = Model.Context.DialogueSystemModel;
-            var getNpcInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
-            NpcID = getNpcInfo.Item1;
-            NpcPos = getNpcInfo.Item2;
-            CanvasNpc.transform.position = new Vector3(NpcPos.x, NpcPos.y + CANVAS_OFFSET, NpcPos.z); //For 3d mode
-            DialogAreaEnterSwitcher(true); //For 3d mode
-            DialogueSystemModel.NpcID = NpcID;
+            TargetTag = other.tag;
+            Trace = other.gameObject;
+            if (other.tag.Equals("NPC"))
+            {
+                DialogueSystemModel = Model.Context.DialogueSystemModel;
+                var getNpcInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
+                NpcID = getNpcInfo.Item1;
+                NpcPos = getNpcInfo.Item2;
+                CanvasNpc.transform.position = new Vector3(NpcPos.x, NpcPos.y + CANVAS_OFFSET, NpcPos.z);
+                DialogAreaEnterSwitcher(true);
+                DialogueSystemModel.NpcID = NpcID;
+                
+            }
+            
+            if(other.tag.Equals("Trace"))
+            {
+                Debug.Log("Trace");
+                var TraceInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
+                TraceID = TraceInfo.Item1;
+                var TracePos = TraceInfo.Item2;
+                CanvasTrace.transform.position = new Vector3(TracePos.x, TracePos.y + 0.6f, TracePos.z);
+                DialogAreaEnterSwitcher(true);
+                Flag = true;
+            }
         }
 
         public void OnTriggerExit(Collider other)
         {
-            DialogAreaEnterSwitcher(false); //For 3d mode
+            DialogAreaEnterSwitcher(false);
         }
 
         public void GetDialogueSystemModel(DialogueSystemModel model)
@@ -138,9 +166,9 @@ namespace BeastHunter
             DialogueSystemModel = model;
         }
 
-        public Transform GetCharacterCamera() //For 3d mode
+        public Transform GetCharacterCamera()
         {
-          return Services.SharedInstance.CameraService.CharacterCamera.transform; //For 3d mode
+           return Services.SharedInstance.CameraService.CharacterCamera.transform;
         }
         #endregion
     }

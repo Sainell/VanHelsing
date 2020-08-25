@@ -26,9 +26,8 @@ namespace BeastHunter
 
         #region ClassLifeCycle
 
-        public StartDialogueModel(GameObject prefab, GameObject canvasNpc, StartDialogueData startDialogueData, GameContext context) //For 3D mode
-       // public StartDialogueModel(GameObject prefab, StartDialogueData startDialogueData, GameContext context)
-
+        public StartDialogueModel(GameObject prefab, GameObject canvasNpc, GameObject canvasTrace, StartDialogueData startDialogueData, GameContext context) //For 3D mode
+         // public StartDialogueModel(GameObject prefab, StartDialogueData startDialogueData, GameContext context)
         {
             StartDialogueTransform = prefab.transform; //For 3D mode
             StartDialogueData = startDialogueData;
@@ -39,6 +38,7 @@ namespace BeastHunter
             ToTolkNpc.ToTalkClickEvent += startDialogueData.OnDialogueStart;
             PlaceButtonClick.CanvasClickEvent += startDialogueData.OnDialogueStart;
             Services.SharedInstance.EventManager.StartListening(GameEventTypes.DialogueUpdateByQuest, startDialogueData.OnUpdateDialogueByQuest);
+            startDialogueData.CanvasTrace = canvasTrace;
         }
 
         #endregion

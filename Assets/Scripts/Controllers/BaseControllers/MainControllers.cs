@@ -23,6 +23,9 @@
             Add(new DialogueSystemController(context));
             Add(new StartDialogueController(context));
                 Add(new DialogueTriggerController(context)); //*
+
+            Add(new TraceTriggerController(context));
+
             Add(new QuestController(context));
             // Add(new RabbitInitializeController(context, Services.SharedInstance));
             //Add(new RabbitController(context, Services.SharedInstance));

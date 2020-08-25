@@ -18,4 +18,14 @@ MonoBehaviour:
     PlayerTransform: {fileID: 0}
     PrefabCanvasNpc: {fileID: 1847013856518696372, guid: 979bf86d58e4d4244b54a56fe13d10d0,
       type: 3}
-  View: {fileID: 0}
+    PrefabCanvasTrace: {fileID: 1847013856518696372, guid: 820cdf2ac49954e409e0140bc7f8c040,
+      type: 3}
+  NpcPos: {x: 487.57, y: 0, z: 472.61}
+  NpcID: 6
+  TraceID: 1
+  CanvasNpc: {fileID: 0}
+  CanvasTrace: {fileID: 0}
+  CharacterCamera: {fileID: 0}
+  TargetTag: Trace
+  Trace: {fileID: 0}
+  Flag: 1
