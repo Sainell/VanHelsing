@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7719524051742788578}
   - component: {fileID: -8972766919164476478}
   - component: {fileID: 3422806746654923254}
+  - component: {fileID: -3654158605796629988}
   m_Layer: 0
   m_Name: StartDialogueView
   m_TagString: Player
@@ -89,3 +90,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 8
+--- !u!114 &-3654158605796629988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4553418772370073976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e56ccd7a6ce8443a8f1591f82852a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 9

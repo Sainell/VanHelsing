@@ -17,13 +17,13 @@ namespace BeastHunter
         public void On()
         {
             canvas.enabled = true;
-          //  LockCharAction.LockAction(true);
+            LockCharAction.LockAction(true); //UI mode
         }
 
         public void Off()
         {
             canvas.enabled = false;
-          //  LockCharAction.LockAction(false);
+              LockCharAction.LockAction(false); //UI mode
         }
 
         public void Switcher(bool isActive)

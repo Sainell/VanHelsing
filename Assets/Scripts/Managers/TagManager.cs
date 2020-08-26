@@ -12,6 +12,7 @@
         public const string NPC    = "NPC";
         public const string ENEMY  = "Enemy";
         public const string TRACE  = "Trace";
+        public const string INTERACTIVE_OBJECT = "InteractiveObject";
 
         #endregion
     }

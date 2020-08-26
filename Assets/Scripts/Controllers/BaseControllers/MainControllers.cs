@@ -7,7 +7,7 @@
         public MainControllers(GameContext context)
         {
               Add(new CharacterInitilizeController(context));  //*
-            //  Add(new GiantMudCrabInitilizeController(context));
+              Add(new GiantMudCrabInitilizeController(context));
             Add(new DialogueSystemInitializeController(context));
             Add(new StartDialogueInitializeController(context));
                Add(new InitializeInteractableObjectController(context)); //*
@@ -16,7 +16,7 @@
                  Add(new QuestJournalInitializeController(context));
         //    Add(new UIIndicationInitializeController(context)); // UImode
             Add(new PlaceSearcherController(context));
-            //     Add(new GiantMudCrabController(context));
+                 Add(new GiantMudCrabController(context));
                  Add(new TargetController(context)); //*
                   Add(new InputController(context)); //*
                  Add(new CharacterController(context)); //*
@@ -25,6 +25,7 @@
                 Add(new DialogueTriggerController(context)); //*
 
             Add(new TraceTriggerController(context));
+            Add(new InteractiveObjectTriggerController(context));
 
             Add(new QuestController(context));
             // Add(new RabbitInitializeController(context, Services.SharedInstance));

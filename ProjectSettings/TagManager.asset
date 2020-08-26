@@ -25,7 +25,7 @@ TagManager:
   - Weapon
   - Place
   - Trace
-
+  - InteractiveObject
   layers:
   - Default
   - TransparentFX

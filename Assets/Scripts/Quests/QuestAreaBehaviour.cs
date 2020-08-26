@@ -82,6 +82,7 @@ namespace BeastHunter
                 if (!other.gameObject.CompareTag("Player")) return;
                 _lastTrigger = t;
                 Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.AreaEnter, new IdArgs(_areaId));
+                Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.QuestReported, new IdArgs(11));
 
 #if UNITY_EDITOR
                 Debug.Log($"Event[Enter] fired for area [{_areaId}] at {t}");
@@ -122,7 +123,7 @@ namespace BeastHunter
                 if (!other.gameObject.CompareTag("Player")) return;
                 _lastTrigger = t;
                 Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.AreaEnter, new IdArgs(_areaId));
-
+                Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.QuestAccepted, new IdArgs(12));
 #if UNITY_EDITOR
                 Debug.Log($"Event[Enter/Stay] fired for area [{_areaId}] at {t}");
 

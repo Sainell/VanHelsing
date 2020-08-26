@@ -57,6 +57,11 @@ namespace BeastHunter
                             CanvasTrace.transform.LookAt(GetCharacterCamera());
                         }
                     }
+                    if (TargetTag.Equals("InteractiveObject"))
+                    {
+                            CanvasTrace.SetActive(true);
+                            CanvasTrace.transform.LookAt(GetCharacterCamera());
+                    }
                 }
 
                 if (Input.GetButtonDown("Use"))
@@ -66,9 +71,18 @@ namespace BeastHunter
                         DialogStatus(true);
                         CanvasNpc.SetActive(false);
                     }
+
                     if (TargetTag.Equals("Trace"))
                     {
                         TraceStatus(TraceID);
+                        CanvasTrace.SetActive(false);
+                        Flag = false;
+                    }
+
+                    if (TargetTag.Equals("InteractiveObject"))
+                    {
+                        var _questId = 11;
+                        Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.QuestAccepted, new IdArgs(_questId));
                         CanvasTrace.SetActive(false);
                         Flag = false;
                     }
@@ -153,9 +167,19 @@ namespace BeastHunter
                 var TraceInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
                 TraceID = TraceInfo.Item1;
                 var TracePos = TraceInfo.Item2;
-                CanvasTrace.transform.position = new Vector3(TracePos.x, TracePos.y + 0.6f, TracePos.z);
+                CanvasTrace.transform.position = new Vector3(TracePos.x, TracePos.y + 1.1f, TracePos.z);
                 DialogAreaEnterSwitcher(true);
                 Flag = true;
+            }
+
+            if (other.tag.Equals("InteractiveObject"))
+            {
+                Debug.Log("InteractiveObject");
+                var TraceInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
+                TraceID = TraceInfo.Item1;
+                var TracePos = TraceInfo.Item2;
+                CanvasTrace.transform.position = new Vector3(TracePos.x, TracePos.y + 0.9f, TracePos.z);
+                DialogAreaEnterSwitcher(true);
             }
         }
 

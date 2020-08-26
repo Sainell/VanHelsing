@@ -83,7 +83,7 @@ namespace BeastHunter
             }
 
             Model.DialogueCanvas.enabled = isActive;
-          //  LockCharAction.LockAction(isActive);
+            LockCharAction.LockAction(isActive); //for 3d mode
         }
 
         public void ButtonClickNumber(string buttonName)

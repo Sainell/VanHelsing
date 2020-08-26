@@ -10,7 +10,7 @@ namespace BeastHunter
         public GameContext Context;
         public DialogueSystemModel DialogueSystemModel;
         public bool IsStartDialogueFlagOn;
-        public bool IsDialogueAreaEnter = true;
+        public bool IsDialogueAreaEnter = false; // switch  UI | 3d mode
 
         #endregion
 

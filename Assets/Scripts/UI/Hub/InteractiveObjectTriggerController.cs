@@ -3,7 +3,7 @@
 
 namespace BeastHunter
 {
-    public sealed class DialogueTriggerController : IAwake, ITearDown
+    public class InteractiveObjectTriggerController : IAwake, ITearDown
     {
         #region Fields
 
@@ -15,7 +15,7 @@ namespace BeastHunter
 
         #region ClassLifeCycles
 
-        public DialogueTriggerController(GameContext context)
+        public InteractiveObjectTriggerController(GameContext context)
         {
             _context = context;
         }
@@ -27,13 +27,13 @@ namespace BeastHunter
 
         public void OnAwake()
         {
-            var npcs = _context.GetTriggers(InteractableObjectType.Npc);
-            foreach (var trigger in npcs)
+            var objects = _context.GetTriggers(InteractableObjectType.InteractiveObject);
+            foreach (var trigger in objects)
             {
-                var dialogueBehavior = trigger as DialogueBehavior;
-                dialogueBehavior.OnFilterHandler += OnFilterHandler;
-                dialogueBehavior.OnTriggerEnterHandler += OnTriggerEnterHandler;
-                dialogueBehavior.OnTriggerExitHandler += OnTriggerExitHandler;
+                var objectBehavior = trigger as InteractiveObjectBehavior;
+                objectBehavior.OnFilterHandler += OnFilterHandler;
+                objectBehavior.OnTriggerEnterHandler += OnTriggerEnterHandler;
+                objectBehavior.OnTriggerExitHandler += OnTriggerExitHandler;
             }
         }
 
@@ -44,13 +44,13 @@ namespace BeastHunter
 
         public void TearDown()
         {
-            var npcs = _context.GetTriggers(InteractableObjectType.Npc);
-            foreach (var trigger in npcs)
+            var objects = _context.GetTriggers(InteractableObjectType.InteractiveObject);
+            foreach (var trigger in objects)
             {
-                var dialogueBehavior = trigger as DialogueBehavior;
-                dialogueBehavior.OnFilterHandler -= OnFilterHandler;
-                dialogueBehavior.OnTriggerEnterHandler -= OnTriggerEnterHandler;
-                dialogueBehavior.OnTriggerExitHandler -= OnTriggerExitHandler;
+                var objectBehavior = trigger as InteractiveObjectBehavior;
+                objectBehavior.OnFilterHandler -= OnFilterHandler;
+                objectBehavior.OnTriggerEnterHandler -= OnTriggerEnterHandler;
+                objectBehavior.OnTriggerExitHandler -= OnTriggerExitHandler;
             }
         }
 
@@ -62,7 +62,7 @@ namespace BeastHunter
         private bool OnFilterHandler(Collider tagObject)
         {
 
-            return tagObject.CompareTag(TagManager.NPC);
+            return tagObject.CompareTag(TagManager.INTERACTIVE_OBJECT);
         }
 
         private void OnTriggerEnterHandler(ITrigger enteredObject, Collider other)
@@ -79,5 +79,4 @@ namespace BeastHunter
 
         #endregion
     }
-
 }
