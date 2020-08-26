@@ -27,12 +27,11 @@ namespace BeastHunter
         public void OnAwake()
         {
             var dialogueSystemData = Data.DialogueSystemData;
-            var inst = GameObject.Find("MapDialogueSystem");
-            if (inst == null)               
+             instance = GameObject.Find("MapDialogueSystem"); // for UI mode
+            if (instance == null)               
             {
                 instance = GameObject.Instantiate(dialogueSystemData.DialogueSystemStruct.Prefab);
             }
-            instance = inst;
                 DialogueSystemModel dialogueSystem = new DialogueSystemModel(instance, dialogueSystemData);
                 _context.DialogueSystemModel = dialogueSystem;
             

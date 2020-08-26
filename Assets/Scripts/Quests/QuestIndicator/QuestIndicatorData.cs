@@ -28,43 +28,52 @@ namespace BeastHunter
 
         #region Methods
 
-        public void QuestionMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model)
+     //   public void QuestionMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model)  //UI mode
+        public void QuestionMarkShow(bool isOn, GameObject npc, QuestIndicatorModel model)
         {
-            // model.QuestIndicatorTransform.GetChild(2).gameObject.SetActive(isOn);
-            if (npc.tag != "Place")
-            {
-                npc.transform.Find("FinishQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
-            }
-            else
-            {
-                npc.transform.Find("QuestIndicatorFinish").GetComponent<Image>().enabled = isOn;
-            }
+             model.QuestIndicatorTransform.GetChild(2).gameObject.SetActive(isOn); //For 3D mode
+            //#region UI  mode 
+            //if (npc.tag != "Place")
+            //{
+            //    npc.transform.Find("FinishQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
+            //}
+            //else
+            //{
+            //    npc.transform.Find("QuestIndicatorFinish").GetComponent<Image>().enabled = isOn;
+            //}
+            //#endregion
         }
 
-        public void TaskQuestionMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model)
+    //    public void TaskQuestionMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model) //UI mode
+        public void TaskQuestionMarkShow(bool isOn, GameObject npc, QuestIndicatorModel model)
         {
-            // model.QuestIndicatorTransform.GetChild(1).gameObject.SetActive(isOn);
-            if (npc.tag != "Place")
-            {
-                npc.transform.Find("TaskQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
-            }
-            else
-            {
-                npc.transform.Find("QuestIndicatorTask").GetComponent<Image>().enabled = isOn;
-            }
+             model.QuestIndicatorTransform.GetChild(1).gameObject.SetActive(isOn);
+            //#region UI  mode 
+            //if (npc.tag != "Place")
+            //{
+            //    npc.transform.Find("TaskQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
+            //}
+            //else
+            //{
+            //    npc.transform.Find("QuestIndicatorTask").GetComponent<Image>().enabled = isOn;
+            //}
+            //#endregion
         }
 
-        public void ExclamationMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model)
+      //  public void ExclamationMarkShow(bool isOn, GameObject npc)//, QuestIndicatorModel model) // UImode
+        public void ExclamationMarkShow(bool isOn, GameObject npc, QuestIndicatorModel model)
         {
-            //    model.QuestIndicatorTransform.GetChild(0).gameObject.SetActive(isOn);
-            if (npc.tag != "Place")
-            {
-                npc.transform.Find("StartQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
-            }
-            else
-            {
-                npc.transform.Find("QuestIndicatorStart").GetComponent<Image>().enabled = isOn;
-            }
+                model.QuestIndicatorTransform.GetChild(0).gameObject.SetActive(isOn);
+            //#region UI  mode 
+            //if (npc.tag != "Place")
+            //{
+            //    npc.transform.Find("StartQuest").GetChild(0).GetComponent<Image>().enabled = isOn;
+            //}
+            //else
+            //{
+            //    npc.transform.Find("QuestIndicatorStart").GetComponent<Image>().enabled = isOn;
+            //}
+            //#endregion
         }
 
         public void SetPosition(Transform npcTransform, Transform questIndicatorTransform)
@@ -75,23 +84,23 @@ namespace BeastHunter
 
         public void QuestIndicatorCheck(EventArgs arg0)
         {
-            //foreach (QuestIndicatorModel questIndicatorModel in Context.QuestIndicatorModelList)
+            foreach (QuestIndicatorModel questIndicatorModel in Context.QuestIndicatorModelList)
+            {
+                questIndicatorModel.QuestIndicatorData.GetQuestInfo(questIndicatorModel.NpcTransform.GetComponent<IGetNpcInfo>().GetInfo().Item1, null  , 0, questIndicatorModel);
+            }
+            //foreach(var npc in NpcList)
             //{
-            //    questIndicatorModel.QuestIndicatorData.GetQuestInfo(questIndicatorModel.NpcTransform.GetComponent<IGetNpcInfo>().GetInfo().Item1, questIndicatorModel);
+            //    GetQuestInfo(npc.Key, npc.Value.gameObject, 0);
+            //  //  var placeName = npc.Value.transform.parent.parent.transform.Find("TitleImage/TitleText").GetComponent<Text>().text;              
             //}
-            foreach(var npc in NpcList)
-            {
-                GetQuestInfo(npc.Key, npc.Value.gameObject, 0);
-              //  var placeName = npc.Value.transform.parent.parent.transform.Find("TitleImage/TitleText").GetComponent<Text>().text;              
-            }
-            foreach (var npc in newNpcList)
-            {
-                GetQuestInfo(npc.Key, npc.Value.gameObject, 0);
-            }
-            foreach (var item in newItemList)
-            {
-                GetQuestInfo(item.Key, item.Value.gameObject, 1);
-            }
+            //foreach (var npc in newNpcList)
+            //{
+            //    GetQuestInfo(npc.Key, npc.Value.gameObject, 0);
+            //}
+            //foreach (var item in newItemList)
+            //{
+            //    GetQuestInfo(item.Key, item.Value.gameObject, 1);
+            //}
         }
 
         public void OnClickPlace(Place currentPlace)
@@ -124,7 +133,8 @@ namespace BeastHunter
             //}
         }
 
-        public void GetQuestInfo(int npcID, GameObject npc, int type)//QuestIndicatorModel model)
+       // public void GetQuestInfo(int npcID, GameObject npc, int type)//QuestIndicatorModel model) // UI mode
+        public void GetQuestInfo(int npcID, GameObject npc, int type, QuestIndicatorModel model)
         {
 
             var questModel = Context.QuestModel; //model.Context.QuestModel;
@@ -158,7 +168,7 @@ namespace BeastHunter
                             !hasRequiredQuest &
                             !hasForbiddenQuest)
                         {
-                            TaskQuestionMarkShow(true, npc);
+                            TaskQuestionMarkShow(true, npc, model);
                             break;
                         }
                         else
@@ -191,7 +201,7 @@ namespace BeastHunter
 
                             if (!flag)
                             {
-                                TaskQuestionMarkShow(false, npc);
+                                TaskQuestionMarkShow(false, npc, model);
                             }
                         }
                     }
@@ -240,11 +250,11 @@ namespace BeastHunter
                             {
                                 if (!completedQuests.Contains(currentQuestID) & !activeQuestsById.Contains(currentQuestID) & !hasRequiredQuest & !hasForbiddenQuest)
                                 {
-                                    ExclamationMarkShow(true, npc);
+                                    ExclamationMarkShow(true, npc, model);
                                 }
                                 else
                                 {
-                                    ExclamationMarkShow(false, npc);
+                                    ExclamationMarkShow(false, npc, model);
                                 }
                             }
 
@@ -265,7 +275,7 @@ namespace BeastHunter
                                             !hasRequiredQuest &
                                             !hasForbiddenQuest)
                                         {
-                                            TaskQuestionMarkShow(true, npc);
+                                            TaskQuestionMarkShow(true, npc, model);
                                             break;
                                         }
                                         else
@@ -298,7 +308,7 @@ namespace BeastHunter
 
                                             if (!flag)
                                             {
-                                                TaskQuestionMarkShow(false, npc);
+                                                TaskQuestionMarkShow(false, npc, model);
                                             }
                                         }
                                     }
@@ -309,11 +319,11 @@ namespace BeastHunter
                             {
                                 if (questsWithCompletedAllTaskWithOptional.Contains(currentQuestID) || questsWithCompletedAllTask.Contains(currentQuestID))
                                 {
-                                    QuestionMarkShow(true, npc);
+                                    QuestionMarkShow(true, npc, model);
                                 }
                                 else
                                 {
-                                    QuestionMarkShow(false, npc);
+                                    QuestionMarkShow(false, npc, model);
                                 }
                             }
                         }

@@ -16,9 +16,8 @@ namespace BeastHunter
 
         private void OnMouseDown()
         {
-            Debug.Log("Bulletin Board open");
             _light.color = new Color(255, 0, 0);
-            Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.QuestAccepted, new IdArgs(_questId));
+         //   Services.SharedInstance.EventManager.TriggerEvent(GameEventTypes.QuestAccepted, new IdArgs(_questId)); // UI mode
         }
         private void OnMouseUp()
         {
@@ -26,7 +25,6 @@ namespace BeastHunter
         }
         private void OnMouseEnter()
         {
-            Debug.Log("enter");
             _light.color = new Color(255, 255, 0);
             _light.enabled = true;
         }
@@ -34,7 +32,7 @@ namespace BeastHunter
         private void OnMouseExit()
         {
             _light.enabled = false;
-            Debug.Log("exit");
         }
+
     }
 }

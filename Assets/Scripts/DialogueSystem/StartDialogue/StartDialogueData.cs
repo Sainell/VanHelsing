@@ -37,25 +37,25 @@ namespace BeastHunter
             {
                 if (!DialogueSystemModel.DialogueCanvas.enabled)
                 {
-                   // CanvasNpc.SetActive(true);//For 3d mode
-                    // CanvasNpc.transform.LookAt(GetCharacterCamera()); //For 3d mode
+                    CanvasNpc.SetActive(true);//For 3d mode
+                    CanvasNpc.transform.LookAt(GetCharacterCamera()); //For 3d mode
                 }
                 if (Input.GetButtonDown("Use"))
                 {
                     DialogStatus(true);
-                    // CanvasNpc.SetActive(false); //For 3d mode
+                    CanvasNpc.SetActive(false); //For 3d mode
                 }
                 if (Input.GetButtonDown("Cancel"))
                 {
                     DialogStatus(false);
-                    // CanvasNpc.SetActive(true);//For 3d mode
+                    CanvasNpc.SetActive(true);//For 3d mode
                 }
             }
             else
             {
                 if (Model != null)
                 {
-                  //  CanvasNpc.SetActive(false);//For 3d mode
+                    CanvasNpc.SetActive(false);//For 3d mode
                     if (DialogueSystemModel.DialogueCanvas.enabled)
                     {
                         DialogStatus(false);
@@ -105,11 +105,11 @@ namespace BeastHunter
             Model.IsDialogueAreaEnter = isOn;
         }
 
-        //public Transform GetParent()
-        //{
-        //    var player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);  //For 3d mode
-        //    return player.transform;
-        //}
+        public Transform GetParent() //For 3D mode
+        { //For 3D mode
+            var player = GameObject.FindGameObjectWithTag(TagManager.PLAYER);  //For 3d mode
+            return player.transform; //For 3D mode
+        } //For 3D mode
 
         public void SetPerent(Transform startDialogueTransform, Transform parent)
         {
@@ -123,14 +123,14 @@ namespace BeastHunter
             var getNpcInfo = other.GetComponent<IGetNpcInfo>().GetInfo();
             NpcID = getNpcInfo.Item1;
             NpcPos = getNpcInfo.Item2;
-            //  CanvasNpc.transform.position = new Vector3(NpcPos.x, NpcPos.y + CANVAS_OFFSET, NpcPos.z); //For 3d mode
-            //  DialogAreaEnterSwitcher(true); //For 3d mode
+            CanvasNpc.transform.position = new Vector3(NpcPos.x, NpcPos.y + CANVAS_OFFSET, NpcPos.z); //For 3d mode
+            DialogAreaEnterSwitcher(true); //For 3d mode
             DialogueSystemModel.NpcID = NpcID;
         }
 
         public void OnTriggerExit(Collider other)
         {
-            // DialogAreaEnterSwitcher(false); //For 3d mode
+            DialogAreaEnterSwitcher(false); //For 3d mode
         }
 
         public void GetDialogueSystemModel(DialogueSystemModel model)
@@ -138,10 +138,10 @@ namespace BeastHunter
             DialogueSystemModel = model;
         }
 
-        //public Transform GetCharacterCamera() //For 3d mode
-        //{
-        //  // return Services.SharedInstance.CameraService.CharacterCamera.transform; //For 3d mode
-        //}
+        public Transform GetCharacterCamera() //For 3d mode
+        {
+          return Services.SharedInstance.CameraService.CharacterCamera.transform; //For 3d mode
+        }
         #endregion
     }
 }
