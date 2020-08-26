@@ -23,6 +23,8 @@ namespace BeastHunter
         public string TargetTag;
         public GameObject Trace;
         public bool Flag;
+        public bool dialogueStatus;
+
 
         #endregion
 
@@ -95,6 +97,7 @@ namespace BeastHunter
         {
             DialogueSystemModel.DialogueNode = DialogueGenerate.DialogueCreate(NpcID, Model.Context);
             ShowCanvasEvent?.Invoke(isShowDialogCanvas);
+            dialogueStatus = isShowDialogCanvas;
         }
 
         private void TraceStatus(int id)
@@ -170,6 +173,36 @@ namespace BeastHunter
         {
            return Services.SharedInstance.CameraService.CharacterCamera.transform;
         }
+
+        public void OnUpdateDialogueByQuest(EventArgs args)// test updating in dialog
+        {
+            DialogStatus(true);
+        }
+
+        public void OnDialogueStart(int npcId)
+        {
+            NpcID = npcId;
+            if (NpcID == 0)
+            {
+                DialogStatus(true);
+            }
+            DialogueSwitcher();
+        }
+
+        private void DialogueSwitcher()
+        {
+            if (!dialogueStatus)
+            {
+                DialogStatus(true);
+            }
+            else
+            {
+                DialogStatus(false);
+                NpcID = 0;
+            }
+        }
+
+
         #endregion
     }
 }

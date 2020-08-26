@@ -6,7 +6,7 @@ namespace BeastHunter {
     [CreateAssetMenu (fileName = "Data", menuName = "DataTest")]
     public sealed class Data : ScriptableObject {
         #region Fields
-
+        
         [SerializeField] private string _sphereDataPath;
         [SerializeField] private string _characterDataPath;
         [SerializeField] private string _startDialogueDataPath;
@@ -19,6 +19,7 @@ namespace BeastHunter {
         [SerializeField] private string _questIndicatorDataPath;
         [SerializeField] private string _questJournalDataPath;
         [SerializeField] private string _traceDataPath;
+        [SerializeField] private string _uIIndicationDataPath;
 
         private static Data _instance;
         private static SphereData _sphereData;
@@ -33,6 +34,7 @@ namespace BeastHunter {
         private static RabbitData _rabbitData;
         private static QuestJournalData _questJournalData;
         private static TraceData _traceData;
+        private static UIIndicationData _uIIndicationData;
 
         #endregion
 
@@ -170,6 +172,19 @@ namespace BeastHunter {
                 return _traceData;
             }
         }
+
+        public static UIIndicationData UIIndicationData
+        {
+            get
+            {
+                if (_uIIndicationData == null)
+                {
+                    _uIIndicationData = Load<UIIndicationData>("Data/" + Instance._uIIndicationDataPath);
+                }
+                return _uIIndicationData;
+            }
+        }
+
         #endregion
 
 
