@@ -14,7 +14,9 @@
                    Add(new QuestInitializeController(context));
                  Add(new QuestIndicatorInitializeController(context));
                  Add(new QuestJournalInitializeController(context));
-        //    Add(new UIIndicationInitializeController(context)); // UImode
+            //    Add(new UIIndicationInitializeController(context)); // UImode
+            Add(new TraceInitializeController(context));
+
             Add(new PlaceSearcherController(context));
                  Add(new GiantMudCrabController(context));
                  Add(new TargetController(context)); //*
@@ -23,7 +25,7 @@
             Add(new DialogueSystemController(context));
             Add(new StartDialogueController(context));
                 Add(new DialogueTriggerController(context)); //*
-
+            Add(new TraceController(context));
             Add(new TraceTriggerController(context));
             Add(new InteractiveObjectTriggerController(context));
 

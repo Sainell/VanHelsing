@@ -13,12 +13,24 @@ MonoBehaviour:
   m_Name: TraceData
   m_EditorClassIdentifier: 
   TraceStruct:
-    Prefab: {fileID: 4553418772370073976, guid: d92b3fc300606784b99d450f68d62c7e,
-      type: 3}
-    PlayerTransform: {fileID: 0}
+    TraceList:
+    - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
+        type: 3}
+      Id: 1
+      Position: {x: 488, y: 0.6, z: 491}
+    - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
+        type: 3}
+      Id: 2
+      Position: {x: 490, y: 0.6, z: 506}
+    - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
+        type: 3}
+      Id: 3
+      Position: {x: 478, y: 0.5, z: 519}
+    - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
+        type: 3}
+      Id: 4
+      Position: {x: 456, y: 0.5, z: 537}
   Model: {fileID: 0}
-  NpcPos: {x: 0, y: 0, z: 0}
-  TraceID: 0
   CharacterCamera: {fileID: 0}
   TargetTag: 
   Canvas: {fileID: 0}

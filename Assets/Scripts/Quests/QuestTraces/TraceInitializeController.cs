@@ -26,14 +26,13 @@ namespace BeastHunter
         public void OnAwake()
         {
             var TraceData = Data.TraceData;
-                GameObject instance = GameObject.Instantiate(TraceData.TraceStruct.Prefab, TraceData.TraceStruct.PlayerTransform);
-
-                TraceModel Trace = new TraceModel(instance, TraceData, _context);
+            foreach( var traceInfo in TraceData.TraceStruct.TraceList)
+            {
+                GameObject instance = GameObject.Instantiate(traceInfo.Prefab);
+                instance.transform.position = traceInfo.Position;
+                TraceModel Trace = new TraceModel(instance, TraceData, traceInfo, _context);
                 _context.TraceModelList.Add(Trace);
-
-          //  TraceData.SetPerent(instance.transform, TraceData.GetParent());
-
-
+            }
         }
 
         #endregion

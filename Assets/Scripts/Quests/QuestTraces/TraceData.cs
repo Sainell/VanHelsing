@@ -11,8 +11,6 @@ namespace BeastHunter
 
         public TraceStruct TraceStruct;
         public TraceModel Model;
-        public Vector3 NpcPos;
-        public int TraceID;
         public Transform CharacterCamera;
         public string TargetTag;
         public GameObject Canvas;

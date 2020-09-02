@@ -22,12 +22,16 @@ namespace BeastHunter
 
         #region ClassLifeCycle
 
-        public TraceModel(GameObject prefab, TraceData traceData, GameContext context)
+        public TraceModel(GameObject prefab, TraceData traceData, Trace traceInfo, GameContext context)
         {
+            var instance = prefab.GetComponent<QuestTraceInfo>();
             TraceData = traceData;
             TraceStruct = traceData.TraceStruct;
             Context = context;
             TraceData.Model = this;
+            instance.TraceId = traceInfo.Id;
+            instance.TracePosition = traceInfo.Position;
+            
         }
 
         #endregion

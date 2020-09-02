@@ -9,8 +9,7 @@ namespace BeastHunter
     {
         #region Fields
 
-        public GameObject Prefab;
-        public Transform PlayerTransform;
+        public Trace[] TraceList;
 
         #endregion
     }

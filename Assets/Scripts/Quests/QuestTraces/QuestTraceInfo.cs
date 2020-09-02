@@ -6,7 +6,6 @@ namespace BeastHunter
     public sealed class QuestTraceInfo : MonoBehaviour, IGetNpcInfo
     {
         #region Fields
-
         public Vector3 TracePosition;
         public int TraceId;
 
@@ -15,7 +14,7 @@ namespace BeastHunter
 
         #region UnityMethods
 
-        private void Awake()
+        private void Start()
         {
             TracePosition = transform.position;
         }
