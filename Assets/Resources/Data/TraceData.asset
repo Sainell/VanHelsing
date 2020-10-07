@@ -25,11 +25,11 @@ MonoBehaviour:
     - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
         type: 3}
       Id: 3
-      Position: {x: 478, y: 0.5, z: 519}
+      Position: {x: 478, y: 0.4, z: 519}
     - Prefab: {fileID: 6372360538111762052, guid: 98662e81e0c3291409443a335757f1d7,
         type: 3}
       Id: 4
-      Position: {x: 456, y: 0.5, z: 537}
+      Position: {x: 456, y: 0.4, z: 537}
   Model: {fileID: 0}
   CharacterCamera: {fileID: 0}
   TargetTag: 
