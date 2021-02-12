@@ -83,7 +83,7 @@ MonoBehaviour:
     _rightHandHitBoxRadius: 1
     _rightHandHitBoxCenter: {x: -1, y: 0, z: 0}
   AttackStateSkills:
-    _defaultSkillEnable: 0
+    _defaultSkillEnable: 1
     _defaultSkillId: 0
     _defaultSkillRangeMin: 3
     _defaultSkillRangeMax: 5
