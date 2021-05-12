@@ -63,9 +63,6 @@ namespace BeastHunter
             }
         }
 
-        public int InstanceID { get; }
-        public GameObject BuffEffectPrefab { get; private set; }
-
         #endregion
 
 

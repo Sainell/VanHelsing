@@ -10,8 +10,7 @@ namespace BeastHunter
 
         private GameContext _context;
         private GameObject _effects;
-        private CharacterModel _model;  //need baseModel?
-        private EnemyModel _enemyModel;
+        private BaseModel _model;
         private Dictionary<string, ParticleSystem> _effectsDic;
 
         #endregion
@@ -19,19 +18,11 @@ namespace BeastHunter
 
         #region ClassLifeCycle
 
-        public VisualEffectController(GameContext context, CharacterModel model) // need BaseModel?
+        public VisualEffectController(GameContext context, BaseModel model)
         {
             _context = context;
             _model = model;
             _effects = _model.BuffEffectPrefab;
-            _effectsDic = new Dictionary<string, ParticleSystem>();
-        }
-
-        public VisualEffectController(GameContext context, EnemyModel model) // need BaseModel?
-        {
-            _context = context;
-            _enemyModel = model;
-            _effects = _enemyModel.BuffEffectPrefab;
             _effectsDic = new Dictionary<string, ParticleSystem>();
         }
 
@@ -45,11 +36,6 @@ namespace BeastHunter
             {
                 _model.CurrentStats.BuffHolder.BuffEffectEnable += EnableEffect;
                 _model.CurrentStats.BuffHolder.BuffEffectDisable += DisableEffect;
-            }
-            if (_enemyModel != null)
-            {
-                _enemyModel.CurrentStats.BuffHolder.BuffEffectEnable += EnableEffect;
-                _enemyModel.CurrentStats.BuffHolder.BuffEffectDisable += DisableEffect;
             }
 
             var effects = _effects.GetComponentsInChildren<ParticleSystem>(false);
@@ -68,11 +54,6 @@ namespace BeastHunter
             {
                 _model.CurrentStats.BuffHolder.BuffEffectEnable -= EnableEffect;
                 _model.CurrentStats.BuffHolder.BuffEffectDisable -= DisableEffect;
-            }
-            if (_enemyModel != null)
-            {
-                _enemyModel.CurrentStats.BuffHolder.BuffEffectEnable -= EnableEffect;
-                _enemyModel.CurrentStats.BuffHolder.BuffEffectDisable -= DisableEffect;
             }
         }
 
