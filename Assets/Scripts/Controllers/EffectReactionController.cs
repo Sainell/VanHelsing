@@ -61,9 +61,10 @@ namespace BeastHunter
             switch (type)
             {
                 case EffectType.Burning:
-                    if (_model != null && _model is BossModel)
+                    if (_model != null && _model is EnemyModel)
                     {
-                        (_model as BossModel).BossStateMachine.SetCurrentStateAnyway(BossStatesEnum.Standstill, type);
+                        _model.ThisEnemyData.ReactionList[0].ActivateReaction(_model);
+                      //  (_model as BossModel).BossStateMachine.SetCurrentStateAnyway(BossStatesEnum.Standstill, type);
                     }
                     break;
                 case EffectType.Wetting:

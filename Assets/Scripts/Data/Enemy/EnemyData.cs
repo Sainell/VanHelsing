@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace BeastHunter
@@ -10,6 +11,7 @@ namespace BeastHunter
         [SerializeField] private GameObject _prefab;
         [SerializeField] private Stats _startStats;
         [SerializeField] private ItemReactions _itemReactions;
+        [SerializeField] private List<BaseReactionData> _reactionList;
         private Vector3 _movementVector;
         private Quaternion _targetRotation;
 
@@ -21,6 +23,7 @@ namespace BeastHunter
         public GameObject Prefab => _prefab;
         public Stats StartStats => _startStats;
         public ItemReactions ItemReactions => _itemReactions;
+        public List<BaseReactionData> ReactionList => _reactionList;
 
         #endregion
 

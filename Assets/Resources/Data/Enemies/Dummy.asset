@@ -45,6 +45,7 @@ MonoBehaviour:
       _crushingDamageResistance: 0
       _penetratingDamageResistance: 0
       _explosionDamageResistance: 0
+      _bleedingDamageResistance: 0
       _fireDamageResistance: 0
       _waterDamageResistance: 0
       _iceDamageResistance: 0
@@ -76,6 +77,8 @@ MonoBehaviour:
     ScaryItems: []
     AttractiveSmell: 
     ScarySmell: 
+  _reactionList:
+  - {fileID: 11400000, guid: a780f1e9d2b62584fb9616848a0ee7c3, type: 2}
   _damageTextObject: {fileID: 4412952828577057898, guid: 6d425abeb5520e548a4d642f7687c932,
     type: 3}
   _dummyHeight: 2

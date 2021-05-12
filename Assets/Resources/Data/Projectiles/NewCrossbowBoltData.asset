@@ -28,7 +28,7 @@ MonoBehaviour:
   _projectileDamage:
     PhysicalDamageType: 4
     PhysicalDamageValue: 13
-    ElementDamageType: 4
+    ElementDamageType: 1
     ElementDamageValue: 10
   _isDestroyedAfterInstantiation: 0
   _isDestroyedAfterHit: 0
